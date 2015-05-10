@@ -1,0 +1,35 @@
+//********************************************************************************
+// Extends                                                                       
+//********************************************************************************
+
+%clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+%hide-text {
+ 	text-indent: -99999px;
+ 	direction: ltr;
+}
+
+%visually-hidden {
+	position: absolute !important;
+	overflow: hidden;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+}
+
+%vertical-align {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}

@@ -1,0 +1,42 @@
+/********************************************************************************
+ Size-xs                                                                        
+*********************************************************************************/
+
+@media screen and (max-width: 768px) {
+
+	// carousel
+	.carousel-caption {
+		display: none;
+	}
+
+	// navbar-breadcrumb
+	.navbar-breadcrumb {
+
+		a {
+			width: 100%;
+			margin: 0 auto;
+			padding-left: 43px;
+			@include float(none);
+
+			&:before {
+				left: 13px;
+			}
+
+			&:after {
+				display: none;
+			}
+		}
+	}
+
+	.row-offcanvas {
+		
+		h1, h2 {
+			word-wrap: break-word;
+		}
+	}
+
+	// sidebar
+	#sidebar {
+		margin-top: 5rem;
+	}
+}

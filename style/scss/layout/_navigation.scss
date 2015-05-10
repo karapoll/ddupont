@@ -1,0 +1,220 @@
+/********************************************************************************
+ Navigation                                                                    
+*********************************************************************************/
+
+// main
+.navbar-wrapper {
+
+	nav {
+
+		&.navbar {
+			width: $full-width;
+			position: fixed;
+			margin-bottom: 0;
+			border: 0 none;
+			opacity: .75;
+
+			.navbar-brand {
+				margin-right: 2rem;
+				color: $color-brand-main;
+			}
+		}
+	}
+}
+
+// sidebar
+#sidebar {
+
+	.list-group {
+
+		a.list-group-item {
+
+			&.active,
+			&:hover,
+			&.active:focus {
+			  	background-color: $color-brand-main;
+			  	border-color: $color-brand-main;
+			}
+
+			&:first-child {
+				border-radius: 0;
+				font-weight: bold;
+			}
+
+			&:last-child {
+				border-radius: 0;
+			}
+		}
+	}
+}
+
+// breadcrumb
+// comments for versioning
+.navbar-breadcrumb {
+
+	// centering
+	display: inline-block;
+	width: $full-width;
+	overflow: hidden;
+	margin: 5rem auto;
+
+	// @include box-shadow(rgba(0, 0, 0, 0.35) 0 0 15px 1px);
+	// @include border-radius(5px);
+
+	// add the numbers for each link using CSS counters. Flag is the name of the counter. 
+	// to be defined using counter-reset in the parent element of the links
+	counter-reset: flag;
+
+	a {
+		width: 25%;
+		text-decoration: none;
+		outline: none;
+		display: block;
+		font-size: 14px;
+		line-height: 36px;
+		color: $color-text;
+		@include float(left);
+
+		// need more margin on the left of links to accomodate the numbers
+		padding-left: 75px;
+
+		// background: #666;
+		// @include background-image(linear-gradient(135deg, #666, #333));
+		position: relative;
+
+		// since the first link does not have a triangle before it we can reduce the left padding 
+		// to make it look consistent with other links
+		&:first-child {
+			padding-left: 46px;
+			// @include border-radius(0 5px 5px 0); to match with the parent's radius 
+
+			&:before {
+				left: 14px;
+			}
+		}
+
+		// &:last-child {
+		// 	@include border-radius(0 5px 5px 0); to prevent glitches on hover
+		// }
+
+		// hover / active styles
+		// &.active {
+		// 	background: #333;
+		// 	@include background-image(linear-gradient(135deg, #333, #000));
+
+		// 	&:after {
+		// 		background: #333;
+		// 		@include background-image(linear-gradient(135deg, #333, #000));
+		// 	} 
+		// }
+
+		// &:hover {
+		// 	background: #333;
+		// 	@include background-image(linear-gradient(135deg, #333, #000));
+
+
+		// 	&:after {
+		// 		background: #333;
+		// 		@include background-image(linear-gradient(135deg, #333, #000));
+		// 	}
+		// }
+
+		// adding the arrows for the breadcrumbs using rotated pseudo elements
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+
+			// half of square's length
+			right: -18px; 
+
+			// same dimension as the line-height of .breadcrumb a
+			width: 36px; 
+			height: 36px;
+
+			// as you see the rotated square takes a larger height. which makes it tough to position it properly. 
+			// so we are going to scale it down so that the diagonals become equal to the line-height of the link. 
+			// we scale it to 70.7% because if square's: 
+			// length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
+			// if diagonal required = 1; length = 1/1.414 = 0.707
+			// @include transform(scale(.707));
+			@include transform(rotate(45deg));
+
+			// need to prevent the arrows from getting buried under the next link
+			z-index: 1;
+
+			// background same as links but the gradient will be rotated to compensate with the transform applied
+			// background: #666;
+			// @include background-image(linear-gradient(135deg, #666, #333));
+
+			// stylish arrow design using box shadow
+			@include box-shadow(rgba(0, 0, 0, 0.1) 1px -1px 0 1px);
+			// 5px - for rounded arrows and 
+			// 50px - to prevent hover glitches on the border created using shadows 
+			@include border-radius(0 5px 0 50px);
+		}
+
+		// arrow after last link not needed
+		&:last-child:after {
+			content: none;
+		}
+
+		// :before used to show numbers
+		&:before {
+			content: counter(flag);
+			counter-increment: flag;
+
+			// some styles now
+			@include border-radius(100%);
+			text-align: center;
+			width: 20px;
+			height: 20px;
+			line-height: 20px;
+			margin: 8px 0;
+			position: absolute;
+			top: 0;
+			left: 46px;
+			// background: #444;
+			// @include background-image(linear-gradient(#444, #222));
+			font-weight: bold;
+		}
+
+	}
+}
+
+.flat a {
+	background: $color-white;
+	color: $color-black;
+	font-weight: bold;
+	@include transition-property(all);
+  	@include transition-duration(.5s);
+  	@include transition-timing-function(ease-in);
+
+  	&:before {
+		background: $color-white;
+		@include box-shadow(#ccc 0 0 0 1px);
+	}
+
+  	&:after {
+		background: $color-white;
+		color: $color-black;
+		font-weight: bold;
+		@include transition-property(all);
+	  	@include transition-duration(.5s);
+	  	@include transition-timing-function(ease-in);
+	}
+
+	&:hover,
+	&.active,
+	&:hover:after, 
+	&.active:after {
+		background: $color-brand-main;
+	}
+
+	&:last-child:hover,
+	&:last-child.active,
+	&:last-child:hover:after, 
+	&:last-child.active:after {
+		background: #f0ad4e;
+	}
+}

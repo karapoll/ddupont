@@ -1,0 +1,29 @@
+/********************************************************************************
+ Search                                                                        
+*********************************************************************************/
+
+.search {
+	overflow: hidden;
+	margin: 5rem auto;
+
+	.form-group {
+		@include float(left);
+		width: 80%;
+
+		.form-control {
+		  	height: 5rem;
+		  	border-radius: 0;
+		  	font-size: 1.75rem;
+		}
+	}
+
+	.btn-search {
+		@include float(left);
+		width: 19%;
+		margin-left: 1%;
+		height: 5rem;
+		font-size: 1.75rem;
+	}
+}
+
+

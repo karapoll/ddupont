@@ -1,0 +1,84 @@
+//********************************************************************************
+// Mixins                                                                        
+//********************************************************************************
+
+// rem-px fallback
+// @mixin u($property, $values) {
+//     $px : ();
+//     $rem: ();
+
+//     @each $value in $values {
+
+//         @if $value == 0 or $value == auto {
+//             $px : append($px , $value);
+//             $rem: append($rem, $value);
+//         }
+
+//         @else {
+//             $unit: unit($value);
+//             $val: parseInt($value);
+
+//             @if $unit == "px" {
+//                 $px : append($px,  $value);
+//                 $rem: append($rem, ($val / $pixelBase + rem));
+//             }
+
+//             @if $unit == "rem" {
+//                 $px : append($px,  ($val * $pixelBase + px));
+//                 $rem: append($rem, $value);
+//             }
+//         }
+//     }
+
+//     @if $px == $rem {
+//         #{$property}: $px;
+//     } @else {
+//         #{$property}: $px;
+//         #{$property}: $rem;
+//     }
+// }
+
+// svg-png fallback
+// usage: @include background-image('pattern');
+// or other way in initialize.js
+$image-path: '../../img' !default;
+$fallback-extension: 'png' !default;
+$retina-suffix: '@2x';
+@mixin background-image($name, $size:false){
+    background-image: url(#{$image-path}/#{$name}.svg);
+
+    @if($size){
+        background-size: $size;
+    }
+
+    .no-svg &{
+        background-image: url(#{$image-path}/#{$name}.#{$fallback-extension});
+
+        @media only screen and (-moz-min-device-pixel-ratio: 1.5), 
+        	only screen and (-o-min-device-pixel-ratio: 3/2), 
+        	only screen and (-webkit-min-device-pixel-ratio: 1.5), 
+        	only screen and (min-device-pixel-ratio: 1.5) {
+          	background-image: url(#{$image-path}/#{$name}#{$retina-suffix}.#{$fallback-extension});
+        }
+    }
+}
+
+// cross-browser opacity
+@mixin opacity($opacity) {
+	opacity: $opacity;
+	$opacity-ie: $opacity * 100;
+	filter: alpha(opacity=$opacity-ie); // IE8
+}
+
+// breakpoints
+// usage: .element { color: red; @include breakpoint(medium) { color: blue; } }
+// @mixin breakpoint($name) {
+//         @if map-has-key($breakpoints, $name) {
+//             @media #{inspect(map-get($breakpoints, $name))} {
+//         @content;
+//         }
+//     }
+//     @else {
+//         @warn "Couldn't find a breakpoint named `#{$name}`.";
+//     }
+// }

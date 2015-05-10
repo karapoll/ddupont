@@ -1,0 +1,26 @@
+/********************************************************************************
+ Sections                                                                      
+*********************************************************************************/
+
+section {
+}
+
+.container, 
+.container-fluid {
+
+	.jumbotron {
+		border-radius: 0;
+	}
+}
+
+.marketing {
+	margin: 5rem auto;
+
+	.featurette-divider{
+		margin: 3rem auto;
+	}
+}
+
+.row-offcanvas {
+	margin: 5rem 0;
+}
